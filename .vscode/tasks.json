@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "sqlproj: Build supply_chain",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"e:/Projects/DS/logistic_agent/supply_chain/supply_chain.sqlproj"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Builds the supply_chain SQL project"
+		}
+	]
+}
