@@ -72,7 +72,11 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=FDElogistic321!" -p 1433:143
 ```
 docker ps -a
 ```
-6. Run the script after change the SQL_SERVER_HOST to cloud IP address
+6. If docker container stopped
+```
+sudo docker start legacy-mssql
+```
+7. Run the script after change the SQL_SERVER_HOST to cloud IP address
 ```
 python scripts\ingest_legacy_data.py
 ```
