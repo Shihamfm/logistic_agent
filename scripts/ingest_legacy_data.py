@@ -11,7 +11,7 @@ project_root = script_dir.parents[0] # climbs up 1 levels to project root folder
 
 load_dotenv()
 
-data_path = project_root / "data" / "dynamic_supply_chain_logistics_dataset.csv"
+data_path = project_root / "data" / "raw" / "dynamic_supply_chain_logistics_dataset.csv"
 
 db_host = os.getenv("SQL_SERVER_HOST")
 db_port = os.getenv("SQL_SERVER_PORT")

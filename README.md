@@ -1,4 +1,5 @@
 # Logistic Agent
+# Phase 0: Data Ingestion
 
 ## Source:
 ### Data: https://www.kaggle.com/datasets/datasetengineer/logistics-and-supply-chain-dataset?resource=download
@@ -87,3 +88,7 @@ Save Password: Check this box
 Database name: Type master (or leave it on "Select a database")
 Encrypt: Change this from Mandatory to Optional (or False)
 ```
+
+# Phase 1: SOP Ingestion
+- Get the pinecone API key
+- Run python scripts\ingest_sop_pinecone.py
