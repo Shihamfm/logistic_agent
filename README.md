@@ -138,6 +138,19 @@ Find any active shipments near Los Angeles (Latitude ~33.8, Longitude ~-118.1). 
 ```
 I'm a new dispatcher on the night shift. Can you quickly explain the difference between a Tier 1 and Tier 2 escalation?
 ```
+# Phase 4:
+- Create New Query in cloud_supply_chain
+- Create the Agent Audit log table
+```
+CREATE TABLE FDE_VIEWS.AgentAuditLog(
+    LogID INT IDENTITY(1,1) PRIMARY KEY,
+    Timestamp DATETIME DEFAULT GETDATE(),
+    SessionID VARCHAR(50),
+    NodeExecuted VARCHAR(50),
+    ToolName VARCHAR(50),
+    Content NVARCHAR(MAX) -- NVARCHAR to safely handles JSON strings and LLM 
+);
+```
 
 
 
