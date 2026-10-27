@@ -19,3 +19,4 @@ sqlalchemy
 pandas
 ipykernel
 sentence-transformers
+langchain-groq

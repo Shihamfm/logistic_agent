@@ -96,3 +96,48 @@ Encrypt: Change this from Mandatory to Optional (or False)
 # Phase 1: SOP Ingestion
 - Get the pinecone API key
 - Run python scripts\ingest_sop_pinecone.py
+
+# Phase 2: Data Security
+- Click on file scripts\setup_security_and_view.sql
+- Once done, create a new connection now with Agent-Profile (cloud_supply_chain_ro)
+
+```
+Profile Name: cloud_supply_chain_ro
+Server name*: 15.135.187.245 (Derived the IP from created public IP address from created EC2 instance)
+Port: 1433
+Trust server certificate: turn it ON (Crucial for Docker)
+Authentication type*: SQL Login
+User name*: USR_FDE_RO
+Password*: FDEAgentPassword2026!
+Save Password: Check this box
+Database name: Type master (or leave it on "Select a database")
+Encrypt: Change this from Mandatory to Optional (or False)
+```
+
+- Connect and test below commands
+Test 1 - should work
+```
+SELECT TOP 5 * FROM FDE_VIEWS.VW_ACTIVE_FLEET;
+````
+
+Test 2 - should fail
+```
+SELECT TOP 5 * FROM dbo.supply_chain_hist_raw_data
+```
+# Phase 3: 
+- Testing agent tools
+run src\agent_tools.py
+- Testing agent
+run src\orchestrator.py
+
+- Test case: 1
+```
+Find any active shipments near Los Angeles (Latitude ~33.8, Longitude ~-118.1). Check the local weather there, and tell me if the current cargo temperature violates the SOP for fresh perishables.
+```
+- Test case: 2
+```
+I'm a new dispatcher on the night shift. Can you quickly explain the difference between a Tier 1 and Tier 2 escalation?
+```
+
+
+
