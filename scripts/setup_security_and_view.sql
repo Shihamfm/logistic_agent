@@ -33,8 +33,6 @@ DENY INSERT, UPDATE, DELETE ON dbo.supply_chain_hist_raw_data TO USR_FDE_RO;
 GO
 
 --- Grant access to the audit log view, explicitly denying everything else
-GRANT INSERT ON FDE_VIEWS.AgentAuditLog TO USR_FDE_RO;
-DENY SELECT ON FDE_VIEWS.AgentAuditLog TO USR_FDE_RO;
-DENY UPDATE, DELETE ON FDE_VIEWS.AgentAuditLog TO USR_FDE_RO;
+GRANT SELECT, INSERT ON FDE_VIEWS.AgentAuditLog TO USR_FDE_RO;
 GO
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDE Dispatch Console</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='script.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="https://cdn-icons-png.flaticon.com/512/2830/2830305.png" alt="Logo" class="logo">
+            <h2>CognitAI Command Center</h2>
+        </div>
+        <div class="nav-modes">
+            <button class="nav-btn active" data-tab="dispatch">🧊 Dispatch Console</button>
+            <button class="nav-btn" data-tab="audit">🛡️ Security & Audit Logs</button>
+        </div>
+        <div class="meta">
+            <p>Session: <code id="session-id-display">...</code></p>
+            <button id="purge-btn" class="secondary-btn">🗑️ Purge Session</button>
+        </div>
+    </aside>
+
+    <main class="content">
+        <!-- Dispatch Tab -->
+        <section id="dispatch-view" class="view-panel active">
+            <header>
+                <h1>Cold-Chain Incident Control Dashboard</h1>
+                <p class="subtitle">Production Data Engineering Pipeline • Real-Time Decision Optimization</p>
+            </header>
+            <div id="chat-stream" class="chat-container"></div>
+            <div class="input-bar">
+                <input type="text" id="user-input" placeholder="Query fleet telemetry, corridor updates, or compliance thresholds...">
+                <button id="send-btn">Send</button>
+            </div>
+        </section>
+
+        <!-- Audit Tab -->
+        <section id="audit-view" class="view-panel">
+            <header>
+                <h1>🛡️ Enterprise Agent Audit Trail</h1>
+                <p class="subtitle">Secure database inspection of FDE_VIEWS.AgentAuditLog</p>
+            </header>
+            <form id="admin-auth-form" class="auth-gate">
+                <input type="text" id="admin-user" placeholder="Admin Username" required>
+                <input type="password" id="admin-pass" placeholder="Admin Password" required>
+                <button type="submit">Authenticate & Load Logs</button>
+            </form>
+            <div id="audit-table-wrapper" class="table-container"></div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', path='style.js') }}"></script>
+</body>
+</html>

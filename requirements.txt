@@ -20,3 +20,6 @@ pandas
 ipykernel
 sentence-transformers
 langchain-groq
+fastapi
+uvicorn
+jinja2
