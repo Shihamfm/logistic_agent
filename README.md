@@ -152,5 +152,51 @@ CREATE TABLE FDE_VIEWS.AgentAuditLog(
 );
 ```
 
+# Phase 5
+- Create UI/UX using static\script.css, static\style.js and templates\index.html files
+- Run python app.py
 
+# Phase 6: CI/CD
+- Crate a new instance 'supply_chain_server_test' for deployment
+- Keep everything as previous including key pair and security group. 
+- In the security group Inbound rules add another Security group ID as 'Custom TCP' with port range 8000 and the Source is 0.0.0/0
+- Open the terminal with 'supply_chain_server_test' public IP address.
+```
+sudo apt update && sudo apt install -y python3-pip python3-venv git
+cd
+git clone https://github.com/Shihamfm/logistic_agent.git
+cd logistic_agent
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
+- insert the .env file ( create the .env file using nano .env and insert all the elements)
+```
+ls
+nano .env
+ls
+ls -a
+```
+
+- make sure if ODBC Driver 17 for SQL Server installed
+```
+sudo apt update
+sudo apt install -y unixodbc unixodbc-dev
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+curl -fsSL https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+sudo apt update
+sudo ACCEPT_EULA=Y apt install -y msodbcsql17
+odbcinst -q -d
+```
+
+- Test the script by open the browser as "http://<YOUR_EC2_PUBLIC_IP>:8000"
+```
+python app.py
+```
+
+# Phase 7: Deployment
+- Create the deploy.yaml file
+- In Github >> Settings >> Environments 
+- Create Environment called 'LOGISTIC ENVIRONMENT'
+- Added the secrets EC2_HOST, EC2_SSH_KEY & EC2_USER.  

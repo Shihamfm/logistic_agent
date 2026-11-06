@@ -1,6 +1,17 @@
 (() => {
-    // 1. Thread & Session Setup
-    const threadId = localStorage.getItem("thread_id") || crypto.randomUUID();
+    // 1. Thread & Session Setup (Insecure HTTP + Secure Fallback)
+    function generateUUID() {
+        if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+            return crypto.randomUUID();
+        }
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === "x" ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    const threadId = localStorage.getItem("thread_id") || generateUUID();
     localStorage.setItem("thread_id", threadId);
 
     // 2. Fallback Markdown Parser
