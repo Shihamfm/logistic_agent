@@ -1,5 +1,49 @@
 # Logistic Agent
+
+# Business Problem
+### In a traditional cold-chain logistics setup, dispatchers and control tower operators manage fleets transporting temperature-sensitive goods (such as fresh perishables and pharmaceuticals) using a fragmented, legacy infrastructure.
+
+![Business Problem](doc\business_problem.png)
+
+
+1. Dashboard & Metric Overload (Dashboard Fatigue):
+- Operators rely on static BI dashboards and legacy MSSQL databases with complex drop-downs, queries, and filters.
+
+- Answering critical questions (e.g., "Which refrigerated trucks in Southern California are at risk of cargo spoilage?") requires tedious manual cross-referencing between GPS locations, IoT temperature readings, traffic data, and delivery ETAs.
+
+2. Disconnected Operational Knowledge (SOPs):
+
+Standard Operating Procedures (incident SOPs, escalation protocols, tier-1 vs. tier-2 rules, emergency cold-storage diversions) reside in unstructured policy documents (Markdown/PDF) disconnected from real-time fleet telemetry.
+
+Operators must manually look up procedures to decide what corrective action to take when a temperature breach or port congestion occurs.
+
+3. Lack of Real-Time Contextual Awareness:
+
+- Internal truck sensors track refrigerated cargo, but the legacy system lacks integration with live external environmental data (e.g., ambient heat spikes, wind speeds, route weather conditions).
+
+4. Security, Governance, and Mutation Risks:
+
+- Enterprise IT requires that any modern querying layer strictly prevents unauthorized database mutations (dropping or corrupting tables) and ensures complete compliance tracking.
+
+
+# The Proposed Solution
+
+![Agent](doc\solution.png)
+
+### As an AI Forward Deployed Engineer (FDE) Logic Agent Copilot using a LangGraph ReAct orchestration agent wrapped rich UI/UX framework:
+
+- **Natural Language Querying (Text-to-SQL)**: Operators query fleet telemetry directly in plain English over hardened, read-only SQL views.
+
+- **Policy Grounding (RAG)**: Uses a vector database (Pinecone) to ground recommendations in enterprise incident SOPs with citations.
+
+- **Live Environmental Telemetry**: Integrates an external live weather API (Open-Meteo) to cross-verify cargo anomalies against ambient conditions.
+
+- **Enterprise Governance**: Implements least-privilege database roles and an immutable audit logging table directly in SQL to track every agent action and tool call.
+
+
 # Phase 0: Data Ingestion
+
+![Data Ingestion](doc\data_ingestion.png)
 
 ## Source:
 ### Data: https://www.kaggle.com/datasets/datasetengineer/logistics-and-supply-chain-dataset?resource=download
@@ -94,6 +138,9 @@ Encrypt: Change this from Mandatory to Optional (or False)
 ```
 
 # Phase 1: SOP Ingestion
+
+![SOP Data Ingestion](doc\sop_data_ingestion.png)
+
 - Get the pinecone API key
 - Run python scripts\ingest_sop_pinecone.py
 
@@ -125,6 +172,9 @@ Test 2 - should fail
 SELECT TOP 5 * FROM dbo.supply_chain_hist_raw_data
 ```
 # Phase 3: 
+
+![Agent](doc\agent.png)
+
 - Testing agent tools
 run src\agent_tools.py
 - Testing agent
@@ -200,3 +250,21 @@ python app.py
 - In Github >> Settings >> Environments 
 - Create Environment called 'LOGISTIC ENVIRONMENT'
 - Added the secrets EC2_HOST, EC2_SSH_KEY & EC2_USER.  
+
+# Phase 8: Create logsitic-agent with EC2 instance
+```
+[Unit]
+Description=Logistics Agent FastAPI Service
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/logistic_agent
+Environment="PATH=/home/ubuntu/logistic_agent/venv/bin"
+ExecStart=/home/ubuntu/logistic_agent/venv/bin/uvicorn app:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+```
