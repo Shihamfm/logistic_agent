@@ -3,7 +3,7 @@
 # Business Problem
 ### In a traditional cold-chain logistics setup, dispatchers and control tower operators manage fleets transporting temperature-sensitive goods (such as fresh perishables and pharmaceuticals) using a fragmented, legacy infrastructure.
 
-![Business Problem](doc\business_problem.png)
+![Business Problem](doc/business_problem.png)
 
 
 1. Dashboard & Metric Overload (Dashboard Fatigue):
@@ -28,7 +28,7 @@ Operators must manually look up procedures to decide what corrective action to t
 
 # The Proposed Solution
 
-![Agent](doc\solution.png)
+![Agent](doc/solution.png)
 
 ### As an AI Forward Deployed Engineer (FDE) Logic Agent Copilot using a LangGraph ReAct orchestration agent wrapped rich UI/UX framework:
 
@@ -43,7 +43,7 @@ Operators must manually look up procedures to decide what corrective action to t
 
 # Phase 0: Data Ingestion
 
-![Data Ingestion](doc\data_ingestion.png)
+![Data Ingestion](doc/data_ingestion.png)
 
 ## Source:
 ### Data: https://www.kaggle.com/datasets/datasetengineer/logistics-and-supply-chain-dataset?resource=download
@@ -139,7 +139,7 @@ Encrypt: Change this from Mandatory to Optional (or False)
 
 # Phase 1: SOP Ingestion
 
-![SOP Data Ingestion](doc\sop_data_ingestion.png)
+![SOP Data Ingestion](doc/sop_data_ingestion.png)
 
 - Get the pinecone API key
 - Run python scripts\ingest_sop_pinecone.py
@@ -173,7 +173,7 @@ SELECT TOP 5 * FROM dbo.supply_chain_hist_raw_data
 ```
 # Phase 3: 
 
-![Agent](doc\agent.png)
+![Agent](doc/agent.png)
 
 - Testing agent tools
 run src\agent_tools.py
