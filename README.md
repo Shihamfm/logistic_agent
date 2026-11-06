@@ -268,3 +268,10 @@ RestartSec=3
 [Install]
 WantedBy=multi-user.target
 ```
+
+# Phase 8: Register and start the service
+```
+sudo systemctl daemon-reload
+sudo systemctl enable logistic-agent
+sudo systemctl restart logistic-agent
+```
