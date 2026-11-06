@@ -24,6 +24,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/logistic_agent
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
             source venv/bin/activate
+            pip install -r requirements.txt
             sudo systemctl restart logistic-agent
